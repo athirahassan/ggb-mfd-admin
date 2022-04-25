@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
     }
 });
 
+
 const upload = multer({storage}).array('file');
 
 app.post('/upload', (req, res) => {
@@ -27,6 +28,8 @@ app.post('/upload', (req, res) => {
         return res.status(200).send(req.files)
     })
 });
+
+
 
 app.listen(8000, () => {
     console.log('App is running on port 8000')

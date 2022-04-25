@@ -5,44 +5,37 @@ import {ProgressBar} from 'react-bootstrap';
 import { IsEqual } from 'react-lodash'
 
 
+
 import './style.css';
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
     const [files, setFiles] = useState([]);
+    var [excel, setExcel] = useState([]);
     
     var bim = "BIM.xlsx";
     
     const onInputChange = (e) => {
         setFiles(e.target.files)
-        
+
+        const fileexcel=e.target.files[0];
+        excel=fileexcel;
+
+        console.log("file excel from luqman")
+        console.log(excel);
+
+
         console.log(typeof e.target.files[0].name)
         
         if((e.target.files[0].name == "BIM.xlsx")||(e.target.files[0].name == "BIM.xls")){
             t = "BIM.xlsx"
-            
         }
-        
-        
-        
     };
-
-    
-   
-
-    
-        
-        
-    
-
-    
 
     const onSubmit = (e) => {
         
         e.preventDefault();
 
-        
-        
         if(t === bim){
 
         const data = new FormData();
@@ -51,11 +44,7 @@ export const ExcelUploader = ({onSuccess}) => {
             
             data.append('file', files[i]);
             
-            
-            
         }
-        
-        
 
         axios.post('//localhost:8000/upload', data,{headers:
         {
