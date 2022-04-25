@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { FileUploader } from './components/FileUploader';
+import { FileUploader } from './views/FileUploader';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Preview } from './components/Preview';
+import { Preview } from './views/Preview';
 
 import './App.css';
 
