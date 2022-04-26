@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { ExcelUploader } from './views/ExcelUploader';
+import { FileUploader } from './views/FileUploader';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter, Route, Link, Routes} from 'react-router-dom';
@@ -12,6 +14,7 @@ import './App.css';
 import ProtectedRoute from './ProtectedRoute';
 
 function App() {
+    var [excel, setExcel] = useState([]);
     const [files, setFiles] = useState([]);
     const onSuccess = (savedFiles) => {
         setFiles(savedFiles)
