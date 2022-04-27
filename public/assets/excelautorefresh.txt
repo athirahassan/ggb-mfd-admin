@@ -1,0 +1,4 @@
+Sub Calculate_range()
+Range("W2:W3000").Calculate
+Application.OnTime DateAdd("s", 1, Now), "Calculate_range"
+End Sub
