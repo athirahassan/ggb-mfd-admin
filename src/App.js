@@ -24,15 +24,16 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Link to="/">Login</Link><br></br>
-      <Link to="/Excel">Excel</Link>
+      <Link to="/Excel">Excel</Link><br/>
+      <Link to="/ImageUploader">uploadimage</Link>
       <Routes>
         <Route exact path="/" element={<Login/>}/>
-        <Route element={<ProtectedRoute />}>
-          <Route path="/Excel" element={<ExcelUploader onSuccess={onSuccess}/>} />
-          <Route path="/preview" element={<Preview files={files}/>}/>
-        </Route>       
+        <Route path="/Excel" element={<ExcelUploader onSuccess={onSuccess}/>} />
+        <Route path="/ImageUploader" element={<FileUploader onSuccess={excel}/>} />
+        <Route path="/preview" element={<Preview files={files}/>}/>
       </Routes>
       </BrowserRouter>
+      <ToastContainer/>
     </div>
   );
 }

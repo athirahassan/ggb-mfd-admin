@@ -6,11 +6,13 @@ import { toast} from 'react-toastify';
 import * as XLSX from 'xlsx';
 
 
+
 import './style.css';
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
-    
+    const [files, setFiles] = useState([]);
+    var [excel, setExcel] = useState([]);
     
     var bim = "BIM.xlsx";
 
@@ -61,6 +63,13 @@ export const ExcelUploader = ({onSuccess}) => {
 
     const onInputChange = (e) => {
         setFiles(e.target.files)
+
+
+        const fileexcel=e.target.files[0];
+        excel=fileexcel;
+
+        console.log("file excel from luqman")
+        console.log(excel);
         console.log(typeof e.target.files[0].name)
         if((e.target.files[0].name == "BIM.xlsx")||(e.target.files[0].name == "BIM.xls")){
             t = "BIM.xlsx" 
