@@ -10,8 +10,8 @@ import './style.css';
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
-    
-    
+    const [files, setFiles] = useState([]);
+    var [excel, setExcel] = useState([]);
     var bim = "BIM.xlsx";
 
     // START DKIP-151
@@ -82,6 +82,7 @@ export const ExcelUploader = ({onSuccess}) => {
             console.log(count);
             window.alert(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.Column22).map((item) => (item.Column2))))
             // alert(items.filter(items => items.Column20).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
+
         } else {
             // END DKIP-151
 

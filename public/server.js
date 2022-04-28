@@ -6,20 +6,17 @@ const app = express();
 
 
 app.use(cors());
-app.use(express.static('assets/bim'));
+app.use(express.static('assets'));
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'assets/bim')
+        cb(null, 'assets')
     },
     filename: (req, file, cb) => {
-        cb(null,file.originalname)
-        //'BIM.xlsx
-        //tambah server.js dekat public
-        //buat folder asset
-        //asal:file.originalname
+        cb(null, 'BIM.xlsx')
     }
 });
+
 
 const upload = multer({storage}).array('file');
 
@@ -33,6 +30,8 @@ app.post('/upload', (req, res) => {
     })
 });
 
-app.listen(8001, () => {
-    console.log('App is running on port 8001')
+
+
+app.listen(8000, () => {
+    console.log('App is running on port 8000')
 });
