@@ -4,6 +4,8 @@ import { toast} from 'react-toastify';
 import './style.css';
 import * as XLSX from 'xlsx';
 
+
+//AMIRAH DONE
 export const FileUploader = ({excell}) => {
 
     //used to get excel from others
@@ -33,66 +35,61 @@ export const FileUploader = ({excell}) => {
     //read image upload after upload excel
     const onInputChange = (e) => {
 
-        //reset numbers of worksheet in excel holder
-        ws=[];
+        var amirah;
+        axios.request({
+            responseType: 'arraybuffer',
+            url: "./assets/BIM.xlsx",
+            method: 'get',
+            headers: {
+            'Content-Type': 'blob',
+            },
+          })
+          .then(res=>{
+                //reset numbers of worksheet in excel holder
+                ws=[];
 
-        //reset names of sheets in excel holder
-        wsnames=[];
+                //reset names of sheets in excel holder
+                wsnames=[];
 
-        
-        //Read excel from uploader
-        excelfile=excel;
-        console.log("this is excel");
-        console.log(excel);
-        fileReader = new FileReader();
-        fileReader.readAsArrayBuffer(excelfile);
-        console.log(excelfile);
-        fileReader.onload=(z)=>{
-            console.log(z);
-            bufferArray=z.target.result;
-            console.log(bufferArray);
-            wb = XLSX.read(bufferArray,{type: "buffer" })
-            console.log("this is wb")
-            console.log(wb);
-            for(let i=0;i<wb.SheetNames.length;i++){
-                ws.push(wb.Sheets[wb.SheetNames[i]]);
-                wsnames.push(wb.SheetNames[i]);
-            }
-            //check internet status
-            var condition = navigator.onLine ? 'online' : 'offline';
-            if (condition === 'online') {
-            console.log('ONLINE');
-            internetstatus="good";
-                fetch('https://www.google.com/', { // Check for internet connectivity
-                    mode: 'no-cors',
+                amirah=res.data;
+                wb = XLSX.read(amirah,{type: "buffer" })
+                for(let i=0;i<wb.SheetNames.length;i++){
+                    ws.push(wb.Sheets[wb.SheetNames[i]]);
+                    wsnames.push(wb.SheetNames[i]);
+                }
+                console.log(ws)
+                var condition = navigator.onLine ? 'online' : 'offline';
+                if (condition === 'online') {
+                console.log('ONLINE');
+                internetstatus="good";
+                    fetch('https://www.google.com/', { // Check for internet connectivity
+                        mode: 'no-cors',
+                        })
+                    .then(() => {
+                        console.log('CONNECTED TO INTERNET');
+                        internetstatus="good";
                     })
-                .then(() => {
-                    console.log('CONNECTED TO INTERNET');
-                    internetstatus="good";
-                })
-                .catch(() => {
-                console.log('INTERNET CONNECTIVITY ISSUE');
+                    .catch(() => {
+                    console.log('INTERNET CONNECTIVITY ISSUE');
+                    internetstatus="not good";
+                    })
+
+                }else{
+                console.log('OFFLINE');
                 internetstatus="not good";
-                })
-
-            }else{
-            console.log('OFFLINE');
-            internetstatus="not good";
-            }
+                }
 
 
-            //check if excel is fetch
-            if(wb!=null){
-                files=e.target.files;
-                console.log(files);
-            }else{
-                toast.error("xlsx not detected");
-            }
-        }
-        
+                //check if excel is fetch
+                if(wb!=null){
+                    files=e.target.files;
+                    console.log(files);
+                }else{
+                    toast.error("xlsx not detected");
+                }
+          })
+          .catch(err=>console.log("failed to get excel"))
 
-        
-        
     };
 
     //click button upload will go here to process excel after upload image
@@ -150,23 +147,26 @@ export const FileUploader = ({excell}) => {
                     var dataxlsx=XLSX.utils.sheet_to_json(ws[0]);
 
                     //go through each row in xlsx
-                    for(let i=0;i<dataxlsx.length;i++){
-
+                    for(let i=1;i<dataxlsx.length;i++){
                         //if Perkataan not same with ImagePath (if ImagePath not empty (already upload))
-                        if(dataxlsx[i].ImagePath!==""){
-                            if(dataxlsx[i].Perkataan!==dataxlsx[i].ImagePath.replace(".jpg","")){
+                        if(dataxlsx[i].Column19!==""){
+                            
+                            if(dataxlsx[i].Column1!==dataxlsx[i].Column19.replace(".jpg","")){
+                                
                                 toast.error("Row number "+(i+2)+" Perkataan does not match with its ImagePath");
                                 console.log("Row number "+(i+2)+" Perkataan does not match with its ImagePath");
+                            }else{
+                                console.log(dataxlsx[i].Column19);
                             }
                         }
 
                         //go through every Image names for each row in xlsx
                         for(let z=0;z<data.length;z++){
                             //if Perkataan is same with filename
-                            if(dataxlsx[i].Perkataan===(data[z].replace(".jpg",""))){
+                            if(dataxlsx[i].Column1===(data[z].replace(".jpg",""))){
 
                                 //if Image already upload then it will not overwrite existing record
-                                if(dataxlsx[i].Status==="RECEIVED"){
+                                if(dataxlsx[i].Column20==="RECEIVED"){
                                     //Remove image from files if its already uploaded
                                     ImageFile.splice(z,1);
                                     toast.error(data[z]+" is not uploaded since it already exist!");
@@ -239,13 +239,6 @@ export const FileUploader = ({excell}) => {
 
     return (
         <div>
-            <h1>Upload excel</h1>
-            <center><input type="file" onChange={(e) => {
-            const file=e.target.files[0];
-            readReactFile(file);
-            }}
-            /></center>
-
             <form method="post" action="#" id="#" onSubmit={onSubmit}>
                 <div className="form-group files">
                     <h1 >Choose your photo with rules given </h1>

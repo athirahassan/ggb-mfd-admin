@@ -6,14 +6,12 @@ import { toast} from 'react-toastify';
 import * as XLSX from 'xlsx';
 
 
-
 import './style.css';
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
     const [files, setFiles] = useState([]);
     var [excel, setExcel] = useState([]);
-    
     var bim = "BIM.xlsx";
 
     // START DKIP-151
@@ -57,19 +55,12 @@ export const ExcelUploader = ({onSuccess}) => {
     function removeDuplicates (items) {
         return items.filter((item, index) => items.indexOf(item) === index);
       }
-      const count = items.filter(items => items.Column19).length;
+      const count = items.filter(items => items.Column22).length;
     // END DKIP-151
     
 
     const onInputChange = (e) => {
         setFiles(e.target.files)
-
-
-        const fileexcel=e.target.files[0];
-        excel=fileexcel;
-
-        console.log("file excel from luqman")
-        console.log(excel);
         console.log(typeof e.target.files[0].name)
         if((e.target.files[0].name == "BIM.xlsx")||(e.target.files[0].name == "BIM.xls")){
             t = "BIM.xlsx" 
@@ -89,8 +80,9 @@ export const ExcelUploader = ({onSuccess}) => {
         // START DKIP-151
         if (count>0) {
             console.log(count);
-            window.alert(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.Column19).map((item) => (item.Column2))))
-            // alert(items.filter(items => items.Column19).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
+            window.alert(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.Column22).map((item) => (item.Column2))))
+            // alert(items.filter(items => items.Column20).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
+
         } else {
             // END DKIP-151
 
@@ -146,7 +138,6 @@ export const ExcelUploader = ({onSuccess}) => {
                        />
                        <ul id="listing"></ul>
             </div>
-            
             <h3>Only .xlsx file will be accepted</h3>
             <button>Submit</button>
         </form>
