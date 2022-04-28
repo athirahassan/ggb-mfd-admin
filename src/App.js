@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { ExcelUploader } from './views/ExcelUploader';
-import { FileUploader } from './views/FileUploader';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter, Route, Link, Routes} from 'react-router-dom';
 
 // views component
 import { ExcelUploader } from './views/ExcelUploader';
+import { FileUploader } from './views/FileUploader';
 import { Preview } from './views/ExcelPreview';
 
 import Login from './views/Login.js';
