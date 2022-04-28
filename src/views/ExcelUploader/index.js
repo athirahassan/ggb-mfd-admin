@@ -54,7 +54,7 @@ export const ExcelUploader = ({onSuccess}) => {
     function removeDuplicates (items) {
         return items.filter((item, index) => items.indexOf(item) === index);
       }
-      const count = items.filter(items => items.Column202).length;
+      const count = items.filter(items => items.Column22).length;
     // END DKIP-151
     
 
@@ -79,7 +79,7 @@ export const ExcelUploader = ({onSuccess}) => {
         // START DKIP-151
         if (count>0) {
             console.log(count);
-            window.alert(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.Column202).map((item) => (item.Column2))))
+            window.alert(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.Column22).map((item) => (item.Column2))))
             // alert(items.filter(items => items.Column19).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
         } else {
             // END DKIP-151
@@ -102,13 +102,13 @@ export const ExcelUploader = ({onSuccess}) => {
                 
             })
                 .then((response) => {
-                    toast.success('Upload Success');
+                    // toast.success('Upload Success');
                     window.alert("Upload BIM.xlsx successfully")
                     
                     onSuccess(response.data)
                 })
                 .catch((e) => {
-                    toast.error('Upload Error')
+                    // toast.error('Upload Error')
                     window.alert("Cannot connect to server.\nPlease make sure you are connected to the Internet and try again");
                     
                 })
