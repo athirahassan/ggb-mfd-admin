@@ -111,7 +111,6 @@ export const ExcelUploader = ({onSuccess}) => {
                 .catch((e) => {
                     toast.error('Upload Error')
                     window.alert("Cannot connect to server.\nPlease make sure you are connected to the Internet and try again");
-                    
                 })
             }
             

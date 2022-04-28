@@ -4,6 +4,8 @@ import { toast} from 'react-toastify';
 import './style.css';
 import * as XLSX from 'xlsx';
 
+
+//AMIRAH DONE
 export const FileUploader = ({excell}) => {
 
     //used to get excel from others
