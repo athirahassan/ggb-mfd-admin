@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter, Route, Link, Routes} from 'react-router-dom';
@@ -8,10 +7,10 @@ import {BrowserRouter, Route, Link, Routes} from 'react-router-dom';
 import { ExcelUploader } from './views/ExcelUploader';
 import { FileUploader } from './views/FileUploader';
 import { Preview } from './views/ExcelPreview';
-
 import Login from './views/Login.js';
-import './App.css';
 import ProtectedRoute from './ProtectedRoute';
+
+import './App.css';
 
 function App() {
     var [excel, setExcel] = useState([]);
@@ -19,7 +18,6 @@ function App() {
     const onSuccess = (savedFiles) => {
         setFiles(savedFiles)
     };
-
     
   return (
     <div className="App">
