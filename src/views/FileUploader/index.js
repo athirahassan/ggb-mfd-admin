@@ -225,7 +225,7 @@ export const FileUploader = ({excell}) => {
     
 
             }else{
-                toast.error("Please upload xlsx file first");
+                toast.error("No images were selected.~");
             }
 
             
