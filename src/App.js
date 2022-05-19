@@ -12,6 +12,7 @@ import Logout from './views/Logout';
 
 
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   
@@ -35,30 +36,36 @@ function App() {
   {console.log("[App] "+sessionStorage.getItem("email"))}
         <BrowserRouter>
         <h1>BIM Sign Bank Administrative Page </h1>
-        <div className="#"> 
-          <Link to="/Excel">
-              <button type="button">
-                Upload Excel
-              </button>
-          </Link>
-          {/* <Link to="/Excel">Excel</Link><br/> */}
+        
+            <Link to="/Excel">
+              <div class="excelButton">
+                {/* <button type="buttonExcel"> */}
+                  Upload Excel
+                {/* </button> */}
+              </div>
+            </Link> <br></br>
+
           <Link to="/ImageUploader">
-              <button type="button">
+          <div class="imageButton">
+              {/* <button type="button"> */}
                 Upload Image
-              </button>
-          </Link>
-          {/* <Link to="/ImageUploader">Uploadimage</Link> */}
+              {/* </button> */}
+              </div>
+          </Link><br></br>
+          
           <Link to="/Logout" onClick={() => signout()}>
-            <button type="button">
+          <div class="signoutButton">
+            {/* <button type="button"> */}
               Sign Out
-              </button>
+              {/* </button> */}
+              </div>
           </Link>
           {/* <div id="buttonLogout" onClick={() => signout()}>
             <p>Sign Out</p>
           </div> */}
           
           <br></br>
-        </div>
+       
         
         <Routes>
           {/* <Route exact path="/" element    = {<Login/>} /> */}
