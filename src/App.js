@@ -1,3 +1,4 @@
+
 import Login from "./views/Login";
 import Dashboard from "./Dashboard";
 
@@ -14,6 +15,7 @@ function App() {
     console.log("Redirect to Dashboard page");
     return <Dashboard />
     }
+
 }
 
 export default App;
