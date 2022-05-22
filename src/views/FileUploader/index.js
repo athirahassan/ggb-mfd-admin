@@ -1,7 +1,7 @@
-import {useState,useRef} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 import { toast} from 'react-toastify';
-import './style.css';
+import './style2.css';
 import * as XLSX from 'xlsx';
 
 
@@ -149,24 +149,24 @@ export const FileUploader = ({excell}) => {
                     //go through each row in xlsx
                     for(let i=1;i<dataxlsx.length;i++){
                         //if Perkataan not same with ImagePath (if ImagePath not empty (already upload))
-                        if(dataxlsx[i].Column19!==""){
+                        if(dataxlsx[i].Perkataan!==""){
                             
-                            if(dataxlsx[i].Column1!==dataxlsx[i].Column19.replace(".jpg","")){
+                            if(dataxlsx[i].Perkataan!==dataxlsx[i].ImagePath.replace(".jpg","")){
                                 
                                 toast.error("Row number "+(i+2)+" Perkataan does not match with its ImagePath");
                                 console.log("Row number "+(i+2)+" Perkataan does not match with its ImagePath");
                             }else{
-                                console.log(dataxlsx[i].Column19);
+                                console.log(dataxlsx[i].ImagePath);
                             }
                         }
 
                         //go through every Image names for each row in xlsx
                         for(let z=0;z<data.length;z++){
                             //if Perkataan is same with filename
-                            if(dataxlsx[i].Column1===(data[z].replace(".jpg",""))){
+                            if(dataxlsx[i].Perkataan===(data[z].replace(".jpg",""))){
 
                                 //if Image already upload then it will not overwrite existing record
-                                if(dataxlsx[i].Column20==="RECEIVED"){
+                                if(dataxlsx[i].Status==="RECEIVED"){
                                     //Remove image from files if its already uploaded
                                     ImageFile.splice(z,1);
                                     toast.error(data[z]+" is not uploaded since it already exist!");
@@ -258,8 +258,6 @@ export const FileUploader = ({excell}) => {
                 <button>Upload</button><br/><br/>
             </form>
         </div>
-        
-        
        
     )
     
