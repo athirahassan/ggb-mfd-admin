@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 import { toast} from 'react-toastify';
-import './style2.css';
+import './style.css';
 import * as XLSX from 'xlsx';
 
 

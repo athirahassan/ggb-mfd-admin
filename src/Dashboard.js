@@ -7,13 +7,15 @@ import {BrowserRouter, Route, Link, Routes} from 'react-router-dom';
 import { ExcelUploader } from './views/ExcelUploader';
 import { FileUploader } from './views/FileUploader';
 import { Preview } from './views/ExcelPreview';
+import { ImageUpload } from './views/ImageUpload';
 import Logout from './views/Logout';
-
+// import Login from './views/Login';
 
 import './App.css';
+import Button from "bootstrap/dist/css/bootstrap.min.css";
 
-function Dashboard() {
-  
+function App() {
+
     var [excel, setExcel] = useState([]);
     const [files, setFiles] = useState([]);
     const onSuccess = (savedFiles) => {
@@ -23,41 +25,57 @@ function Dashboard() {
     const signout = () => {
       console.log("signout button clicked");
       // refresh the page
+      //google.accounts.id.disableAutoSelect();
       sessionStorage.setItem('email',null);
       window.location.reload();
-      
+
     };
-    
+
     return (
       <div className="App">
-        {console.log("[Dashboard] sessionStorage: "+sessionStorage.getItem("email"))}
+  {console.log("[App] "+sessionStorage.getItem("email"))}
         <BrowserRouter>
-        <h1>BIM Sign Bank Administrative Page </h1>
-        <div className="#"> 
+
+
+          <h1>BIM Sign Bank Administrative Page </h1>
           <Link to="/Excel">
-              <button type="button">
+            <div class="excelButton">
+              {/* <button type="buttonExcel"> */}
                 Upload Excel
-              </button>
-          </Link>
+              {/* </button> */}
+            </div>
+          </Link> <br></br>
+
           <Link to="/ImageUploader">
-              <button type="button">
+            <div class="imageButton">
+              {/* <button type="button"> */}
                 Upload Image
-              </button>
-          </Link>
+              {/* </button> */}
+            </div>
+          </Link><br></br>
+
           <Link to="/Logout" onClick={() => signout()}>
-            <button type="button">
+            <div class="signoutButton">
+              {/* <button type="button"> */}
               Sign Out
-              </button>
+              {/* </button> */}
+            </div>
           </Link>
-          
+          {/* <div id="buttonLogout" onClick={() => signout()}>
+            <p>Sign Out</p>
+          </div> */}
+
           <br></br>
-        </div>
-        
+
+
         <Routes>
+          {/* <Route exact path="/" element    = {<Login/>} /> */}
           <Route path="/preview" element = {<Preview files={files}/>} />
           <Route path="/Excel" element   = {<ExcelUploader onSuccess={onSuccess}/>} />
-          <Route path="/ImageUploader" element = {<FileUploader onSuccess={excel} />} />
+          {/* <Route path="/ImageUploader" element = {<FileUploader onSuccess={excel} />} /> */}
+          <Route path="/ImageUploader" element = {<ImageUpload onSuccess={excel} />} />
           <Route exact path="/Logout" element  = {<Logout/>} />
+
         </Routes>
         </BrowserRouter>
         <ToastContainer/>
@@ -65,4 +83,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default App;
