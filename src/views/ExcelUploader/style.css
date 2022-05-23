@@ -1,3 +1,19 @@
+h5{
+
+    text-align: center;
+
+}
+
+#btn-choose{
+    background-color: #0367b9;
+    border-color: #0367b9;
+    color:white;
+    width: 200px;
+    height: 40px;
+    padding:7px;
+    border-radius: 10px;
+}
+
 .files input {
     /* outline: 2px dashed #0367b9;
     outline-offset: -10px; */
@@ -54,21 +70,18 @@ h1{
     color: #0367b9;
 }
 
-h3{
-    display: block;
-    text-align: center;
-    line-height: 150%;
-    color: #0367b9;
-}
+
 
 button{
     
     background-color: #0367b9;
-    color: beige;
-    font-size: large;
-    text-transform: uppercase;
-    margin: 1rem auto;
-    text-align: center;
-    margin-left: 46%;
+    border: 2px #0367b9;
+    color:white;
+    width: 200px;
+    height: 40px;
+    padding:7px;
+    border-radius: 10px;
+    cursor: pointer;
+    
 }
 

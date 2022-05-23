@@ -26,6 +26,7 @@
     height: 40px;
     padding:7px;
     border-radius: 10px;
+    cursor: pointer;
 
 }
 #bapakbutton{
@@ -42,6 +43,7 @@
     border-radius: 10px;
     display: table-cell;
     margin: 5px;
+    cursor: pointer;
 
 }
 
@@ -59,6 +61,7 @@
     border-radius: 10px;
     display: table-cell;
     margin: 5px;
+    cursor: pointer;
 
 }
 

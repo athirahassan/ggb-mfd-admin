@@ -9,10 +9,11 @@ import { FileUploader } from './views/FileUploader';
 import { Preview } from './views/ExcelPreview';
 import { ImageUpload } from './views/ImageUpload';
 import Logout from './views/Logout';
+import Navbar from "./views/Navbar.js";
 // import Login from './views/Login';
 
 import './App.css';
-import Button from "bootstrap/dist/css/bootstrap.min.css";
+//import Button from "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
 
@@ -34,32 +35,29 @@ function App() {
     return (
       <div className="App">
   {console.log("[App] "+sessionStorage.getItem("email"))}
+  
         <BrowserRouter>
-
-
-          <h1>BIM Sign Bank Administrative Page </h1>
-          <Link to="/Excel">
-            <div class="excelButton">
+        <Navbar/>
+        
+          <h1>BIM Sign Bank Administrative Page </h1><br></br>
+          <Link to="/Excel" onClick={ExcelUploader} style={{ textDecoration: 'none' }}>
+            <div class="excelButton" >
               {/* <button type="buttonExcel"> */}
                 Upload Excel
               {/* </button> */}
-            </div>
-          </Link> <br></br>
+            </div><br></br>
+          </Link> <br></br><br></br>
 
-          <Link to="/ImageUploader">
-            <div class="imageButton">
+          <Link to="/ImageUploader" onClick={ImageUpload} style={{ textDecoration: 'none' }}>
+            <div class="imageButton" >
               {/* <button type="button"> */}
                 Upload Image
               {/* </button> */}
-            </div>
+            </div><br></br>
           </Link><br></br>
 
-          <Link to="/Logout" onClick={() => signout()}>
-            <div class="signoutButton">
-              {/* <button type="button"> */}
-              Sign Out
-              {/* </button> */}
-            </div>
+          <Link to="/Logout" onClick={() => signout()} style={{ textDecoration: 'none' }}>
+            
           </Link>
           {/* <div id="buttonLogout" onClick={() => signout()}>
             <p>Sign Out</p>
