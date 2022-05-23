@@ -3,10 +3,11 @@
   display: block;
   margin: auto;
   background-image: url("./images/general/background/home-background.jpg");
-  background-attachment: fixed;
+  background-attachment: 100%;
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
+  background-repeat: repeat;
+  background-size: cover;
+  height: 940px;
 }
 
 #buttonSemua{
@@ -16,8 +17,6 @@
 }
 
 .excelButton{
-  
-
   background-color: #0367b9;
     color:white;
     width: 200px;
@@ -29,8 +28,6 @@
 }
 
 .imageButton{
-  
-  
   background-color: #5a9c97;
     color:white;
     width: 200px;
@@ -79,7 +76,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .App-link {
@@ -99,27 +96,16 @@
 .navbar {
   display: flex;
   align-items: center;
-  
-  
   color: #0367b9;
-  
   font-weight: 300;
 }
 
 .navbar__title {
   margin-right: auto;
   font-size: 100%;
-  
-  
-  
-  
-  
 }
 
 .navbar__item {
-  
   cursor: pointer;
   margin-left: auto;
-  
-  
 }
