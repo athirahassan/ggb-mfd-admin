@@ -7,7 +7,7 @@
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
-  height: 940px;
+  height: 1200px;
 }
 
 #buttonSemua{
@@ -92,7 +92,6 @@
   }
 }
 
-
 .navbar {
   display: flex;
   align-items: center;
@@ -120,4 +119,8 @@
 #googlebtn{
   width: 500px;
   height: 250px;
+}
+
+#button-link{
+  text-decoration: none;
 }

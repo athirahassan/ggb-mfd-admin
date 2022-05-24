@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 import axios from 'axios';
-import { toast} from 'react-toastify';
-import './style.css';
 import * as XLSX from 'xlsx';
 
+import './style.css';
 
 //AMIRAH DONE
 export const FileUploader = ({excell}) => {
@@ -12,10 +12,10 @@ export const FileUploader = ({excell}) => {
     //var [excel,setExcel]=useState([]);
 
 
-    var excel;
-    var excelfile;
-    var fileReader;
-    var bufferArray;
+    // var excel;
+    // var excelfile;
+    // var fileReader;
+    // var bufferArray;
     var wb;
     var ws=[];
     var wsnames=[];
@@ -28,9 +28,9 @@ export const FileUploader = ({excell}) => {
 
 
    
-    const readReactFile=(file)=>{ 
-        excel=file;
-    }
+    // const readReactFile=(file)=>{ 
+    //     excel=file;
+    // }
 
     //read image upload after upload excel
     const onInputChange = (e) => {

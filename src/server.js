@@ -14,9 +14,6 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         cb(null,file.originalname)
-        //'BIM.xlsx
-        //tambah server.js dekat public
-        //buat folder asset
     }
 });
 

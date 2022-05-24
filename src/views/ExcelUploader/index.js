@@ -1,8 +1,9 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 
 import './style.css';
+
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
@@ -10,8 +11,6 @@ export const ExcelUploader = ({onSuccess}) => {
     var bim = "BIM.xlsx";
     const [ve, setVe] = useState('');
     let opi = 1;
-
-    
     
     // START DKIP-151
     var wb;
@@ -19,8 +18,7 @@ export const ExcelUploader = ({onSuccess}) => {
     var [files, setFiles] = useState([]);
     const [items, setItems] = useState([]);    
     const [itemsG, setItemsG] = useState([]);
-
-
+    
     const readReactFile=(file)=>{
       const inputPromise = new Promise((resolve, reject) => {
   
@@ -170,15 +168,25 @@ export const ExcelUploader = ({onSuccess}) => {
     
 
     const onInputChange = (e) => {
-        setFiles(e.target.files)
+        setFiles(e.target.files);
 
-        // console.log(typeof e.target.files[0].name)
-        if((e.target.files[0].name == "BIM.xlsx")||(e.target.files[0].name == "BIM.xls")){
-            t = "BIM.xlsx" 
-            // START DKIP-151
-            readReactFile(e.target.files[0]);
-            // END DKIP-151
+        if(e.target.files[0]){
+            // console.log(typeof e.target.files[0].name)
+            // console.log("check e.target.files[0].name: ", typeof e.target.files[0].name + " " + e.target.files[0].name);
+            // console.log(e.target.files[0].name+ "==''BIM.xlsx'' : ", e.target.files[0].name=="BIM.xlsx");
+            // console.log(e.target.files[0].name+ "===''BIM.xlsx'': ", e.target.files[0].name==="BIM.xlsx");
+            // console.log(e.target.files[0].name+ "==='BIM.xlsx'  : ", e.target.files[0].name==='BIM.xlsx');
+
+            if((e.target.files[0].name === "BIM.xlsx")||(e.target.files[0].name === "BIM.xls")){
+                t = "BIM.xlsx";
+                // START DKIP-151
+                readReactFile(e.target.files[0]);
+                // END DKIP-151
+            }
+        } else {
+            console.log(e.target.files[0]);
         }
+
     };
 
     
@@ -277,13 +285,12 @@ export const ExcelUploader = ({onSuccess}) => {
             {console.log("ve: ",ve)}
             {console.log("ve: ",ve==="")}
             <center>
-                <div>{ve}
-                </div>
-            </center><br></br><br></br><br></br>
+            <div id="ve"><p>{ve}</p></div>
+            </center><br/><br/><br/>
 
             { opi === 1 ?  <center><div id="btn-choose"><button disabled={!ve}>Submit</button></div></center> :  <center><div id="btn-choose"><button >Submit</button></div></center>}
             
-            {/* <center><div id="btn-choose"><button >Submit</button></div></center> */}<br></br><br></br>
+            {/* <center><div id="btn-choose"><button >Submit</button></div></center> */}<br/><br/>
         </form>
     )
 };
