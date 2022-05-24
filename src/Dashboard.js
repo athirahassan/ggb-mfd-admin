@@ -12,7 +12,7 @@ import Logout from './views/Logout';
 // import Login from './views/Login';
 
 import './App.css';
-import Button from "bootstrap/dist/css/bootstrap.min.css";
+// import Button from "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
 
