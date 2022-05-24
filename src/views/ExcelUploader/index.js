@@ -162,6 +162,8 @@ export const ExcelUploader = ({onSuccess}) => {
         }
     }
     // END DKIP-151
+
+    
     
 
     const onInputChange = (e) => {
@@ -232,6 +234,8 @@ export const ExcelUploader = ({onSuccess}) => {
         <form method="post" action="#" id="#" onSubmit={onSubmit}>
             <div className="form-group files">
                 <h1>Upload Your BIM.xlsx File </h1>
+                <p>Only BIM.xlsx file will be accepted</p>
+                <p>Please ensure that the BIM.xlsx has no unresolved conflict.</p>
                 <input directory="BIM.xlsx" type="file"
                 id="BIM"
                 name="BIM"
@@ -243,9 +247,8 @@ export const ExcelUploader = ({onSuccess}) => {
                 <ul id="listing"></ul>
             </div>
             
-            <h3>Only BIM.xlsx file will be accepted</h3>
-            <h3>Please ensure that the BIM.xlsx has no unresolved conflict.</h3>
-            <button>Submit</button>
+            
+            <center><div id="btn-choose"><button >Submit</button></div></center><br></br><br></br>
         </form>
     )
 };

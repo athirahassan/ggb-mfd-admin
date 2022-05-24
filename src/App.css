@@ -2,6 +2,12 @@
   text-align: center;
   display: block;
   margin: auto;
+  background-image: url("./images/general/background/home-background.jpg");
+  background-attachment: 100%;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  height: 940px;
 }
 
 #buttonSemua{
@@ -11,22 +17,25 @@
 }
 
 .excelButton{
-  display: block;
-  margin: auto;
-  height: 50px;
-  width: 200px;
-  background-color: red;
-  color: white;
+  background-color: #0367b9;
+    color:white;
+    width: 200px;
+    height: 40px;
+    padding:7px;
+    border-radius: 10px;
+    display: table-cell;
+    margin: 5px;
 }
 
 .imageButton{
-  display: block;
-  margin: auto;
-  height: 50px;
-  width: 200px;
-  background-color: red;
-  color: white;
-  
+  background-color: #5a9c97;
+    color:white;
+    width: 200px;
+    height: 40px;
+    padding:7px;
+    border-radius: 10px;
+    display: table-cell;
+    margin: 5px;
 }
 
 .signoutButton{
@@ -67,7 +76,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .App-link {
@@ -81,4 +90,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.navbar {
+  display: flex;
+  align-items: center;
+  color: #0367b9;
+  font-weight: 300;
+}
+
+.navbar__title {
+  margin-right: auto;
+  font-size: 100%;
+}
+
+.navbar__item {
+  cursor: pointer;
+  margin-left: auto;
 }
