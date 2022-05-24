@@ -285,8 +285,7 @@ export const ExcelUploader = ({onSuccess}) => {
             {console.log("ve: ",ve)}
             {console.log("ve: ",ve==="")}
             <center>
-                <div id="ve"><p>{ve}</p>
-                </div>
+            <div id="ve"><p>{ve}</p></div>
             </center><br/><br/><br/>
 
             { opi === 1 ?  <center><div id="btn-choose"><button disabled={!ve}>Submit</button></div></center> :  <center><div id="btn-choose"><button >Submit</button></div></center>}
