@@ -14,6 +14,7 @@ export const ExcelUploader = ({onSuccess}) => {
   
     var bim = "BIM.xlsx";
     const [ve, setVe] = useState('');
+    let opi =1;
 
     
     
@@ -86,10 +87,14 @@ export const ExcelUploader = ({onSuccess}) => {
 
             setVe(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.RepeatWord).map((item) => (item.Word))));
             // alert(items.filter(items => items.Column19).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
-
+            opi = 0;
 
             
         } 
+        else{
+            setVe("There is no duplication in Word and Perkataan");
+        }
+
         console.log(ve);
     }
     
@@ -167,12 +172,17 @@ export const ExcelUploader = ({onSuccess}) => {
             </div></center><br></br><br></br><br></br>
 
 
-        
+
+            {console.log(ve)}
+
+            { opi === 1 ? <center><div id="btn-choose"><button>Submit</button></div></center> :  <center><div id="btn-choose"><button disabled={!ve}>Submit</button></div></center>}
+            
+            
+            
             
 
-              
-            
-            <center><div id="btn-choose"><button >Submit</button></div></center><br></br><br></br>
+
+            <br></br><br></br>
         </form>
     )
 };
