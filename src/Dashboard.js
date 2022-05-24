@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Link, Routes} from 'react-router-dom';
 
 // views component
 import { ExcelUploader } from './views/ExcelUploader';
-import { FileUploader } from './views/FileUploader';
+// import { FileUploader } from './views/FileUploader';
 import { Preview } from './views/ExcelPreview';
 import { ImageUpload } from './views/ImageUpload';
 import Logout from './views/Logout';
@@ -41,7 +41,7 @@ function App() {
         
           <h1>BIM Sign Bank Administrative Page </h1><br></br>
           <Link to="/Excel" onClick={ExcelUploader} style={{ textDecoration: 'none' }}>
-            <div class="excelButton" >
+            <div className="excelButton" >
               {/* <button type="buttonExcel"> */}
                 Upload Excel
               {/* </button> */}
@@ -49,7 +49,7 @@ function App() {
           </Link> <br></br><br></br>
 
           <Link to="/ImageUploader" onClick={ImageUpload} style={{ textDecoration: 'none' }}>
-            <div class="imageButton" >
+            <div className="imageButton" >
               {/* <button type="button"> */}
                 Upload Image
               {/* </button> */}
