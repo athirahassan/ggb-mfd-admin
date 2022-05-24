@@ -215,20 +215,13 @@ export const FileUploader = ({excell}) => {
                     }).catch((e)=>{
                         console.log("Images failed to upload in server")
                     })
-
-                    
-
                 }else {
                     toast.error("Exceed 10 files, please refresh and try again");
                     console.log("Exceed 10 files, please refresh and try again");
                 }
-    
-
             }else{
                 toast.error("No images were selected.~");
             }
-
-            
         }else{
             toast.error("Unstable internet connection. Please check your internet and refresh your page");
         }
