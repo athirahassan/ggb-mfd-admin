@@ -180,12 +180,13 @@ export const ExcelUploader = ({onSuccess}) => {
 
     
     const verifyExcel = (e) => {
-       
 
-        if (count>0) {
-            console.log(count);
+        if (checkDataDuplication(items, itemsG)) {
+            // console.log("checkDataDuplication(items, itemsG): ", checkDataDuplication(items, itemsG));
+            console.log("message: ", message);
 
-            setVe(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.RepeatWord).map((item) => (item.Word))));
+            setVe(message);
+            // setVe(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.RepeatWord).map((item) => (item.Word))));
             // alert(items.filter(items => items.Column19).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
 
 
