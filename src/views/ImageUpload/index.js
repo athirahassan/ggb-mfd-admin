@@ -95,6 +95,7 @@ export const ImageUpload=()=>{
         window.location.reload();
     }
 
+    //replace image
     const Replaceitem=(itemfile)=>{
         console.log(errorlist);
         var tempsuccesslist = [...successlist];
@@ -105,7 +106,7 @@ export const ImageUpload=()=>{
             .then((e)=>{
                 console.log(itemfile.name+ " has been replaced");
                 for(let i=0;i<temperrorlist.length;i++){
-                    if(temperrorlist[i].props.children[1].props.children[0].props.children==itemfile.name){
+                    if(temperrorlist[i].props.children[1].props.children[0].props.children===itemfile.name){
                         temperrorlist.splice(i,1);
 
                     }
@@ -173,7 +174,7 @@ export const ImageUpload=()=>{
 
             //data for every row in 'BIM'/ws[0(BIM)/2(Validation)] sheets
             var dataxlsx=XLSX.utils.sheet_to_json(wsheets[0]);
-            var dataxlsx2=XLSX.utils.sheet_to_json(wsheets[2]);
+          
 
             var ImageFileSuccess=[];
             var ImageFileUnsuccess=[];
@@ -186,7 +187,7 @@ export const ImageUpload=()=>{
                     //if Perkataan is same with filename
                     if(dataxlsx[i].Perkataan===(ImageFile[z].name.replace(".jpg",""))){
                         console.log(ImageFile[z].name+" same with perkataan")
-                        if(dataxlsx2[i].Status==="RECEIVED"){
+                        if(dataxlsx[i].Status==="RECEIVED"){
                             console.log(ImageFile[z].name+" not success to upload since exist in excel")
                             ImageFileUnsuccess.push(ImageFile[z]);
                             errorlist.push(
@@ -318,7 +319,6 @@ export const ImageUpload=()=>{
             </center>
             <br/>
         </div>
-        
         
     )
 }

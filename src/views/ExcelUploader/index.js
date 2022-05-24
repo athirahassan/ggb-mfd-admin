@@ -1,13 +1,8 @@
 import {useState} from 'react';
 import axios from 'axios';
-import { toast} from 'react-toastify';
-// import {ProgressBar} from 'react-bootstrap';
-// import { IsEqual, StartCase } from 'react-lodash'
 import * as XLSX from 'xlsx';
-import TextField from "@material-ui/core/TextField";
 
 import './style.css';
-import { memoryStorage } from 'multer';
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
@@ -20,8 +15,11 @@ export const ExcelUploader = ({onSuccess}) => {
     
     // START DKIP-151
     var wb;
+    var message;
     var [files, setFiles] = useState([]);
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState([]);    
+    const [itemsG, setItemsG] = useState([]);
+
 
     const readReactFile=(file)=>{
       const inputPromise = new Promise((resolve, reject) => {
@@ -32,15 +30,32 @@ export const ExcelUploader = ({onSuccess}) => {
         fileReader.onload = (e) => {
           const bufferArray = e.target.result;
           wb = XLSX.read(bufferArray,{type: "buffer" });
-          const wsname = wb.SheetNames[0];
-          const ws = wb.Sheets[wsname];
-          const data = XLSX.utils.sheet_to_json(ws);
-          resolve(data);
+        //   console.log("wb: ", wb);
+        //   console.log("wb.SheetNames: ", wb.SheetNames.length);
+
+          const wbl = wb.SheetNames.length;
+        //   console.log("total Sheets: ", wbl===2);
+          
+          var dataBIM, dataG;
+          if (wbl===2){
+              const wsNameBIM = wb.SheetNames[0];
+              const wsBIM = wb.Sheets[wsNameBIM];
+              dataBIM = XLSX.utils.sheet_to_json(wsBIM);
+            //   console.log(wsBIM + " dataBIM: ", dataBIM);
+
+              const wsNameG = wb.SheetNames[1];
+              const wsG = wb.Sheets[wsNameG];
+              dataG = XLSX.utils.sheet_to_json(wsG);
+            //   console.log(wsG + " dataG: ", dataG);
+          } else {
+              window.alert("BIM sheet and Group sheet not found. Please upload the latest version of BIM.xlsx.");
+          }
+          resolve([dataBIM, dataG]);
 
         // if excel fetch
         if(wb!=null){
             files=e.target.files;
-            console.log(files);
+            // console.log(files);
         }else{
             window.alert("xlsx not detected");
         }
@@ -49,18 +64,104 @@ export const ExcelUploader = ({onSuccess}) => {
         fileReader.onerror = ((error) => {
           reject(error);
         });
-      });
-  
+      });      
+
       inputPromise.then((inData)=> {
-        setItems(inData);
+        //   console.log("inDataBIM: ", inData[0]);
+        //   console.log("inDataGroup: ", inData[1]);
+        setItems(inData[0]);
+        setItemsG(inData[1]);
       })
     };
 
     function removeDuplicates (items) {
         return items.filter((item, index) => items.indexOf(item) === index);
       }
-      
-      const count = items.filter(items => items.RepeatWord).length;
+    //   const count = items.filter(items => items.RepeatWord).length;
+
+    function checkRepeatBIM (items){
+        console.log("[START checkRepeatBIM]");
+        var rPerkataan = items.filter(items => items.RepeatPerkataan).length;
+        var rWord = items.filter(items => items.RepeatWord).length;
+        // console.log(rPerkataan + " > 0:" + (rPerkataan>0));
+        // console.log(rWord + " > 0:" + (rWord>0));
+        
+        var msg;
+        if (rWord > 0){
+            msg = ("\n" + rWord+ " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.RepeatWord).map((item) => (item.Word))));
+        } else if (rWord === 0){
+            msg = ("");
+        } else {
+            msg = ("\nColumn not found\n");
+        }
+
+        if (rPerkataan >0){
+            msg += ("\n" + rPerkataan + " duplicated data found with similar Perkataan as the following:\n" + removeDuplicates(items.filter(items => items.RepeatPerkataan).map((item) => (item.Perkataan)))); 
+        } else if (rWord === 0){
+            msg += ("");
+        } else {
+            msg += ("\nColumn not found\n");
+        }
+        message = msg;
+        <div>{message}</div>
+
+        // console.log("msg: ", msg);        
+        // console.log("message: ", message);
+        console.log(["END checkRepeatBIM"]);
+        return ((rWord > 0 && rPerkataan > 0)) // if got duplicate, return true. else false
+    }
+
+    function checkRepeatGroup (itemsG) {
+        console.log("[START checkRepeatGroup]");
+        var rKumpulan = itemsG.filter(itemsG => itemsG.RepeatKumpulanKategori).length;
+        var rGroup = itemsG.filter(itemsG => itemsG.RepeatGroup).length;
+        // console.log(rKumpulan + " > 0:" + (rKumpulan>0));
+        // console.log(rGroup + " > 0:" + (rGroup>0));
+
+        var msg2;
+        if (rGroup >0){
+            msg2 += ("\n" + rGroup + " duplicated data found with similar GroupCategory as the following:\n" + removeDuplicates(items.filter(items => items.RepeatGroup).map((item) => (item.GroupCategory)))); 
+        } else if (rGroup === 0){
+            msg2 += ("");
+        } else {
+            msg2 += ("\nColumn not found\n");
+        }
+        
+        if (rKumpulan > 0){
+            msg2 = ("\n" + rKumpulan+ " duplicated data found with similar KumpulanKategori as the following:\n" + removeDuplicates(items.filter(items => items.RepeatKumpulanKategori).map((item) => (item.KumpulanKategori))));
+        } else if (rKumpulan === 0){
+            msg2 = ("");
+        } else {
+            msg2 = ("\nColumn not found\n");
+        }
+
+        message += "\n" + msg2;
+
+        // console.log("msg2 ", msg2);
+        // console.log("message: ", message);
+        console.log(["END checkRepeatGroup"]);
+        return ((rKumpulan > 0 && rGroup > 0)) // if got duplicate, return true. else false
+    }
+
+    function checkDataDuplication(items, itemsG){
+        // if(checkRepeatBIM(items)) {  // if got duplicate, return true. else false
+        //     console.log("has repeat data:? ", checkRepeatBIM(items));
+        // } else {
+        //     console.log("no repeat data.", checkRepeatBIM(items));
+        // }
+
+        // if (checkRepeatGroup(itemsG)) {
+        //     console.log("has repeat dataG:? ", checkRepeatGroup(itemsG));
+        // } else {
+        //     console.log("no repeat dataG.", checkRepeatGroup(itemsG));
+        // }
+
+        if (checkRepeatBIM(items)&&checkRepeatGroup(itemsG)){// if got duplicate, return true. else false
+            return true;
+        } else{
+            return false;
+        }
+    }
     // END DKIP-151
 
     
@@ -69,7 +170,7 @@ export const ExcelUploader = ({onSuccess}) => {
     const onInputChange = (e) => {
         setFiles(e.target.files)
 
-        console.log(typeof e.target.files[0].name)
+        // console.log(typeof e.target.files[0].name)
         if((e.target.files[0].name == "BIM.xlsx")||(e.target.files[0].name == "BIM.xls")){
             t = "BIM.xlsx" 
             // START DKIP-151
@@ -106,7 +207,10 @@ export const ExcelUploader = ({onSuccess}) => {
         const data = new FormData();
         
         // START DKIP-151
-        
+        if (checkDataDuplication(items, itemsG)) {
+            // console.log("checkDataDuplication(items, itemsG): ", checkDataDuplication(items, itemsG));
+            console.log("message: ", message);
+        } else {
             // END DKIP-151
 
             for(let i = 0; i < files.length; i++) {
@@ -135,12 +239,11 @@ export const ExcelUploader = ({onSuccess}) => {
                 .catch((e) => {
                     // toast.error('Upload Error')
                     window.alert("Cannot connect to server.\nPlease make sure you are connected to the Internet and try again");
-                    
                 })
             }
             
         // START DKIP-151
-        
+        }
         // END DKIP-151
         else {
                 window.alert("Unsuccessful upload BIM.xlsx\n-Please Select the Correct File (BIM.xlsx only)")
@@ -157,11 +260,12 @@ export const ExcelUploader = ({onSuccess}) => {
                 <input directory="BIM.xlsx" type="file"
                 id="BIM"
                 name="BIM"
-                       accept='.xlsx'
-                       onChange={onInputChange}
-                       className="form-control"
-                       />
-                       <ul id="listing"></ul>
+                accept='.xlsx'
+                onChange={onInputChange}
+                className="form-control"
+                />
+                
+                <ul id="listing"></ul>
             </div>
             
             

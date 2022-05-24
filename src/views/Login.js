@@ -40,6 +40,7 @@ const Login = (props) => {
     if (userInfo.email === 'athirahsn.hassan@gmail.com') {
       setUserInfo({...userInfo});
       sessionStorage.setItem("email",userInfo.email);
+      window.location.reload();
     } else {
       setUserInfo({...userInfo});
       setIsSignedIn(true);
