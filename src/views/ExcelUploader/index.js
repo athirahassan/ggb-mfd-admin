@@ -2,12 +2,16 @@ import {useState} from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 
+import './style.css';
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
   
     var bim = "BIM.xlsx";
+    const [ve, setVe] = useState('');
 
+    
+    
     // START DKIP-151
     var wb;
     var message;
@@ -173,6 +177,22 @@ export const ExcelUploader = ({onSuccess}) => {
             // END DKIP-151
         }
     };
+
+    
+    const verifyExcel = (e) => {
+       
+
+        if (count>0) {
+            console.log(count);
+
+            setVe(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.RepeatWord).map((item) => (item.Word))));
+            // alert(items.filter(items => items.Column19).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
+
+
+            
+        } 
+        console.log(ve);
+    }
     
     const onSubmit = (e) => {
         
@@ -243,6 +263,18 @@ export const ExcelUploader = ({onSuccess}) => {
                 <ul id="listing"></ul>
             </div>
             
+            
+            <center><div id="btn-choose" onClick={verifyExcel}>Verify</div></center><br></br><br></br>
+            
+            <center><div id="ve"><p>{ve}</p>
+            
+            </div></center><br></br><br></br><br></br>
+
+
+        
+            
+
+              
             
             <center><div id="btn-choose"><button >Submit</button></div></center><br></br><br></br>
         </form>
