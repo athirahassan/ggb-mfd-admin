@@ -1,17 +1,18 @@
 import {useState} from 'react';
 import axios from 'axios';
-// import { toast} from 'react-toastify';
-// import {ProgressBar} from 'react-bootstrap';
-// import { IsEqual, StartCase } from 'react-lodash'
 import * as XLSX from 'xlsx';
 
-// import './style.css';
+import './style.css';
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
   
     var bim = "BIM.xlsx";
+    const [ve, setVe] = useState('');
+    let opi = 1;
 
+    
+    
     // START DKIP-151
     var wb;
     var message;
@@ -114,12 +115,14 @@ export const ExcelUploader = ({onSuccess}) => {
         console.log("[START checkRepeatGroup]");
         var rKumpulan = itemsG.filter(itemsG => itemsG.RepeatKumpulanKategori).length;
         var rGroup = itemsG.filter(itemsG => itemsG.RepeatGroup).length;
-        // console.log(rKumpulan + " > 0:" + (rKumpulan>0));
-        // console.log(rGroup + " > 0:" + (rGroup>0));
+        var mm = itemsG.filter(items => itemsG.RepeatKumpulanKategori).map((item) => (item.KumpulanKategori));
+        console.log(mm);
+        console.log(rKumpulan + " > 0:" + (rKumpulan>0));
+        console.log(rGroup + " > 0:" + (rGroup>0));
 
         var msg2;
         if (rGroup >0){
-            msg2 += ("\n" + rGroup + " duplicated data found with similar GroupCategory as the following:\n" + removeDuplicates(items.filter(items => items.RepeatGroup).map((item) => (item.GroupCategory)))); 
+            msg2 = ("\n" + rGroup + " duplicated data found with similar GroupCategory as the following:\n" + removeDuplicates(itemsG.filter(itemsG => itemsG.RepeatGroup).map((item) => (item.GroupCategory)))); 
         } else if (rGroup === 0){
             msg2 += ("");
         } else {
@@ -127,11 +130,11 @@ export const ExcelUploader = ({onSuccess}) => {
         }
         
         if (rKumpulan > 0){
-            msg2 = ("\n" + rKumpulan+ " duplicated data found with similar KumpulanKategori as the following:\n" + removeDuplicates(items.filter(items => items.RepeatKumpulanKategori).map((item) => (item.KumpulanKategori))));
+            msg2 += ("\n" + rKumpulan+ " duplicated data found with similar KumpulanKategori as the following:\n" + removeDuplicates(itemsG.filter(itemsG => itemsG.RepeatKumpulanKategori).map((item) => (item.KumpulanKategori))));
         } else if (rKumpulan === 0){
-            msg2 = ("");
+            msg2 += ("");
         } else {
-            msg2 = ("\nColumn not found\n");
+            msg2 += ("\nColumn not found\n");
         }
 
         message += "\n" + msg2;
@@ -177,6 +180,28 @@ export const ExcelUploader = ({onSuccess}) => {
             // END DKIP-151
         }
     };
+
+    
+    const verifyExcel = (e) => {
+
+        if (checkDataDuplication(items, itemsG)) {
+            // console.log("checkDataDuplication(items, itemsG): ", checkDataDuplication(items, itemsG));
+            console.log("message: ", message);
+
+            setVe(message);
+            // window.alert("Please resolve the issue(s) in the BIM.xlsx");
+            // setVe(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.RepeatWord).map((item) => (item.Word))));
+            // alert(items.filter(items => items.Column19).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
+
+
+            
+        } else{
+            opi = 0;
+            setVe("There is no duplication in Word and Perkataan");
+
+        }
+        console.log(ve);
+    }
     
     const onSubmit = (e) => {
         
@@ -248,7 +273,17 @@ export const ExcelUploader = ({onSuccess}) => {
             </div>
             
             
-            <center><div id="btn-choose"><button >Submit</button></div></center><br></br><br></br>
+            <center><div id="btn-choose" onClick={verifyExcel}>Verify</div></center><br></br><br></br>
+            {console.log("ve: ",ve)}
+            {console.log("ve: ",ve==="")}
+            <center>
+                <div>{ve}
+                </div>
+            </center><br></br><br></br><br></br>
+
+            { opi === 1 ?  <center><div id="btn-choose"><button disabled={!ve}>Submit</button></div></center> :  <center><div id="btn-choose"><button >Submit</button></div></center>}
+            
+            {/* <center><div id="btn-choose"><button >Submit</button></div></center> */}<br></br><br></br>
         </form>
     )
 };

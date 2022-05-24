@@ -1,7 +1,8 @@
 /* global google */
 import React, { useState, useEffect } from "react";
 import GoogleLogin /* , { GoogleLogout } */ from "react-google-login";
-import "../App.css";
+// import "../App.css";
+import './Login.css';
 import Dashboard from "../Dashboard";
 
 const Login = (props) => {
@@ -86,7 +87,20 @@ const Login = (props) => {
   
   return (
     <div>
-        <div>
+        <div className="LoginGoogle">
+        <header className='navbar'>
+        <div className='navbar__title navbar_item'><a href="https://www.bimsignbank.org/home" target="_blank" rel="noopener noreferrer">
+            <img src="https://www.bimsignbank.org/static/media/bim-logo.95848318.jpg" alt="bimlogo" width="15%" height="5%"/></a><br></br><br></br></div>
+        <div className='navbar__item' id="headerright"><h2>BIM Sign Bank Administration</h2></div>
+      
+        <div className='navbar__item' ><a href="https://www.mymfdeaf.org/pengenalan"><img src="https://www.bimsignbank.org/static/media/mfd-logo.9567e887.jpg
+        " alt="link" width="60%" height="10%" /></a></div>
+        
+        <div className='navbar__item' ><a href="https://careers.guidewire.com/guidewire-gives-back"><img src="https://www.bimsignbank.org/static/media/ggb-logo.d044fc73.jpg
+        " alt="link" width="20%" /></a></div>
+        
+              
+    </header>
             {other === 1 ? (
                 <div>
                     {/* { if signed in: show page App, else show login button */
@@ -102,21 +116,23 @@ const Login = (props) => {
                         </div>
                     ) : (
                         <div>
-                          <div>
-                            <h2><code>BIM Sign Bank Administrative Page</code></h2>
+                          <div id="h1">
+                            <h1>Welcome to BIM Sign Bank Administration</h1>
                           </div>
-                          <div>
-                          <GoogleLogin
-                              clientId="140281256136-sn8u0oviifv4smqdo1meltjv4n58bjrf.apps.googleusercontent.com"
-                              // uxMode="redirect"
-                              onSuccess={onSuccess}
-                              cookiePolicy={"single_host_origin"}
-                              //isSignedIn={true}
-                              theme="dark"
-                              onFailure={onFailure}
-                              buttonText="Sign in your account with Google"
-                          />
-                          </div>
+                          <center>
+                          <div id="googlebtn">
+                            <GoogleLogin
+                                clientId="140281256136-sn8u0oviifv4smqdo1meltjv4n58bjrf.apps.googleusercontent.com"
+                                // uxMode="redirect"
+                                onSuccess={onSuccess}
+                                cookiePolicy={"single_host_origin"}
+                                //isSignedIn={true}
+                                theme="dark"
+                                onFailure={onFailure}
+                                buttonText="Sign in your account with Google"
+                            />
+                            </div>
+                          </center>
                         </div>
                         )
                     } 
