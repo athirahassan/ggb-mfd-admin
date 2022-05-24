@@ -1,7 +1,8 @@
-import {React,useState,useRef} from "react";
-import "./style.css";
+import { React, useState, useRef } from "react";
 import axios from 'axios';
 import * as XLSX from 'xlsx';
+
+import "./style.css";
 
 export const ImageUpload=()=>{
     const inputFileRef = useRef( null );
@@ -20,8 +21,8 @@ export const ImageUpload=()=>{
 
 
     var errorlist=[];
-    var errorname=[];
-    var errorreason=[];
+    // var errorname=[];
+    // var errorreason=[];
     var successlist=[];
     
 

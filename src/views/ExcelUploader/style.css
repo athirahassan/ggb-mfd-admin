@@ -1,7 +1,5 @@
 h5{
-
     text-align: center;
-
 }
 
 #btn-choose{
@@ -39,7 +37,7 @@ h5{
     right: 0;
     height: 56px;
     content: "";
-    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+    /* background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png); */
     display: block;
     margin: 0 auto;
     background-size: 100%;
@@ -70,8 +68,6 @@ h1{
     color: #0367b9;
 }
 
-
-
 button{
     
     background-color: #0367b9;
@@ -97,4 +93,3 @@ button{
     border-width: 1px;
     border-radius: 10px;
 }
-
