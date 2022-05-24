@@ -4,14 +4,19 @@ import { toast} from 'react-toastify';
 // import {ProgressBar} from 'react-bootstrap';
 // import { IsEqual, StartCase } from 'react-lodash'
 import * as XLSX from 'xlsx';
+import TextField from "@material-ui/core/TextField";
 
 import './style.css';
+import { memoryStorage } from 'multer';
 var t;
 
 export const ExcelUploader = ({onSuccess}) => {
   
     var bim = "BIM.xlsx";
+    const [ve, setVe] = useState('');
 
+    
+    
     // START DKIP-151
     var wb;
     var [files, setFiles] = useState([]);
@@ -53,7 +58,8 @@ export const ExcelUploader = ({onSuccess}) => {
     function removeDuplicates (items) {
         return items.filter((item, index) => items.indexOf(item) === index);
       }
-      const count = items.filter(items => items.Column22).length;
+      
+      const count = items.filter(items => items.RepeatWord).length;
     // END DKIP-151
 
     
@@ -70,6 +76,22 @@ export const ExcelUploader = ({onSuccess}) => {
             // END DKIP-151
         }
     };
+
+    
+    const verifyExcel = (e) => {
+       
+
+        if (count>0) {
+            console.log(count);
+
+            setVe(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.RepeatWord).map((item) => (item.Word))));
+            // alert(items.filter(items => items.Column19).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
+
+
+            
+        } 
+        console.log(ve);
+    }
     
     const onSubmit = (e) => {
         
@@ -79,12 +101,7 @@ export const ExcelUploader = ({onSuccess}) => {
         const data = new FormData();
         
         // START DKIP-151
-        if (count>0) {
-            console.log(count);
-
-            window.alert(count + " duplicated data found with similar Word(s) as the following:\n" + removeDuplicates(items.filter(items => items.Column22).map((item) => (item.Column2))))
-            // alert(items.filter(items => items.Column19).length + " Duplicate data found in the worksheet: " + items.filter(items => items.Column19).map((item) => + " " + item.Column2))
-        } else {
+        
             // END DKIP-151
 
             for(let i = 0; i < files.length; i++) {
@@ -118,7 +135,7 @@ export const ExcelUploader = ({onSuccess}) => {
             }
             
         // START DKIP-151
-        }
+        
         // END DKIP-151
         else {
                 window.alert("Unsuccessful upload BIM.xlsx\n-Please Select the Correct File (BIM.xlsx only)")
@@ -142,6 +159,18 @@ export const ExcelUploader = ({onSuccess}) => {
                        <ul id="listing"></ul>
             </div>
             
+            
+            <center><div id="btn-choose" onClick={verifyExcel}>Verify</div></center><br></br><br></br>
+            
+            <center><div id="ve"><p>{ve}</p>
+            
+            </div></center><br></br><br></br><br></br>
+
+
+        
+            
+
+              
             
             <center><div id="btn-choose"><button >Submit</button></div></center><br></br><br></br>
         </form>

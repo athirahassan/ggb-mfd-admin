@@ -85,3 +85,16 @@ button{
     
 }
 
+#ve{
+    background-color: white;
+    width: 50%;
+    
+    line-height: 200%;
+    height: fit-content;
+    margin:20px;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+    border-radius: 10px;
+}
+
