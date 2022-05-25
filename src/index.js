@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
 import Dashboard from './Dashboard';
 import Login from './views/Login';
 
-
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,9 +1,10 @@
 /* global google */
 import React, { useState, useEffect } from "react";
-import GoogleLogin /* , { GoogleLogout } */ from "react-google-login";
+import GoogleLogin from "react-google-login";
+import Dashboard from "../Dashboard";
+
 // import "../App.css";
 import './Login.css';
-import Dashboard from "../Dashboard";
 
 const Login = (props) => {
   
@@ -55,6 +56,22 @@ const Login = (props) => {
     console.log("Login failed: res:", res);
   };
 
+  
+  function loadGoogleButton() {
+    return(
+      <GoogleLogin
+        clientId="140281256136-sn8u0oviifv4smqdo1meltjv4n58bjrf.apps.googleusercontent.com"
+        // uxMode="redirect"
+        onSuccess={onSuccess}
+        cookiePolicy={"single_host_origin"}
+        //isSignedIn={true}
+        theme="dark"
+        onFailure={onFailure}
+        buttonText="Sign in your account with Google"
+      />
+    );
+  };
+
   useEffect(() => {
     window.onGoogleLibraryLoad = () => {
       google.accounts.id.initialize({
@@ -83,23 +100,32 @@ const Login = (props) => {
       });
     };
   });
-
   
   return (
     <div>
         <div className="LoginGoogle">
         <header className='navbar'>
-        <div className='navbar__title navbar_item'><a href="https://www.bimsignbank.org/home" target="_blank" rel="noopener noreferrer">
-            <img src="https://www.bimsignbank.org/static/media/bim-logo.95848318.jpg" alt="bimlogo" width="15%" height="5%"/></a><br></br><br></br></div>
-        <div className='navbar__item' id="headerright"><h2>BIM Sign Bank Administration</h2></div>
+        <div className='navbar__title navbar_item'>
+          <a href="https://www.bimsignbank.org/home" target="_blank" rel="noopener noreferrer">
+            <img src="https://www.bimsignbank.org/static/media/bim-logo.95848318.jpg" alt="bimlogo" width="15%" height="5%"/>
+          </a><br/><br/>
+        </div>
+
+        <div className='navbar__item' id="headerright">
+          <h2>BIM Sign Bank Administration</h2>
+        </div>
       
-        <div className='navbar__item' ><a href="https://www.mymfdeaf.org/pengenalan"><img src="https://www.bimsignbank.org/static/media/mfd-logo.9567e887.jpg
-        " alt="link" width="60%" height="10%" /></a></div>
+        <div className='navbar__item' >
+          <a href="https://www.mymfdeaf.org/pengenalan">
+            <img src="https://www.bimsignbank.org/static/media/mfd-logo.9567e887.jpg" alt="link" width="60%" height="10%" />
+          </a>
+        </div>
         
-        <div className='navbar__item' ><a href="https://careers.guidewire.com/guidewire-gives-back"><img src="https://www.bimsignbank.org/static/media/ggb-logo.d044fc73.jpg
-        " alt="link" width="20%" /></a></div>
-        
-              
+        <div className='navbar__item' >
+          <a href="https://careers.guidewire.com/guidewire-gives-back">
+            <img src="https://www.bimsignbank.org/static/media/ggb-logo.d044fc73.jpg" alt="link" width="20%" />
+          </a>
+        </div>
     </header>
             {other === 1 ? (
                 <div>
@@ -120,29 +146,20 @@ const Login = (props) => {
                             <h1>Welcome to BIM Sign Bank Administration</h1>
                           </div>
                           <center>
-                          <div id="googlebtn">
-                            <GoogleLogin
-                                clientId="140281256136-sn8u0oviifv4smqdo1meltjv4n58bjrf.apps.googleusercontent.com"
-                                // uxMode="redirect"
-                                onSuccess={onSuccess}
-                                cookiePolicy={"single_host_origin"}
-                                //isSignedIn={true}
-                                theme="dark"
-                                onFailure={onFailure}
-                                buttonText="Sign in your account with Google"
-                            />
+                            <div>
+                              {loadGoogleButton()}
                             </div>
                           </center>
                         </div>
                         )
                     } 
-
                 </div>
             ) : (
               <div>
                 <div>
-                  <h2><code>-BIM Sign Bank Administrative Page</code></h2>
+                  <h2><code>Welcome to BIM Sign Bank Administration</code></h2>           
                 </div>
+                <div><center>{loadGoogleButton()}</center></div>
               </div>
               )}
         </div>
