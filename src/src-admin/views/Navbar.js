@@ -1,3 +1,4 @@
+import React from "react";
 import "../Dashboard.js";
 import "./Navbar.css";
 

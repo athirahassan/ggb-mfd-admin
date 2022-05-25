@@ -15,6 +15,7 @@ import SelectedCategory from "./views/SelectedCategory";
 import SelectedVocab from "./views/SelectedVocab";
 import SelectedAlphabets from "./views/SelectedAlphabet";
 import FeaturedVideos from "./views/FeaturedVideos";
+import Login from "./src-admin/views/Login";
 
 export default [
   {
@@ -28,6 +29,12 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: Home,
+  },
+  {
+    path: "/admin",
+    exact: true,
+    layout: DefaultLayout,
+    component: Login,
   },
   {
     path: "/comingsoon",
