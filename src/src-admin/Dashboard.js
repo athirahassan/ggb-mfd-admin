@@ -1,9 +1,7 @@
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
 
 // views component
 import { ExcelUploader } from './views/ExcelUploader';

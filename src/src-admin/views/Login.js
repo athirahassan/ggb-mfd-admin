@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import Dashboard from "../Dashboard";
 
-// import "../App.css";
-import './Login.css';
+import "../App.css";
+// import './Login.css';
 
 const Login = (props) => {
   
@@ -142,7 +142,7 @@ const Login = (props) => {
                         </div>
                     ) : (
                         <div>
-                          <div id="h1">
+                          <div className="h1">
                             <h1>Welcome to BIM Sign Bank Administration</h1>
                           </div>
                           <center>

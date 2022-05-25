@@ -16,6 +16,7 @@ import SelectedVocab from "./views/SelectedVocab";
 import SelectedAlphabets from "./views/SelectedAlphabet";
 import FeaturedVideos from "./views/FeaturedVideos";
 import Login from "./src-admin/views/Login";
+
 import Dashboard from "./src-admin/Dashboard"
 import { ExcelUploader } from "./src-admin/views/ExcelUploader";
 import { ImageUpload } from "./src-admin/views/ImageUpload";
@@ -32,6 +33,12 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: Home,
+  },
+  {
+    path: "/admin",
+    exact: true,
+    layout: DefaultLayout,
+    component: Login,
   },
   {
     path: "/comingsoon",
