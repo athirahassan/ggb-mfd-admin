@@ -15,6 +15,10 @@ import SelectedCategory from "./views/SelectedCategory";
 import SelectedVocab from "./views/SelectedVocab";
 import SelectedAlphabets from "./views/SelectedAlphabet";
 import FeaturedVideos from "./views/FeaturedVideos";
+import Login from "./src-admin/views/Login";
+import Dashboard from "./src-admin/Dashboard"
+import { ExcelUploader } from "./src-admin/views/ExcelUploader";
+import { ImageUpload } from "./src-admin/views/ImageUpload";
 
 export default [
   {
@@ -107,4 +111,24 @@ export default [
     layout: DefaultLayout,
     component: FeaturedVideos,
   },   
+  {
+    path: "/admin",
+    exact: true,
+    layout: DefaultLayout,
+    component: Login,
+  },
+  {
+    path: "/admin/excel",
+    exact: true,
+    layout: DefaultLayout,
+    component: ExcelUploader,
+  },
+  {
+    path: "/admin/image",
+    exact: true,
+    layout: DefaultLayout,
+    component: ImageUpload,
+  },
+
+
 ];
